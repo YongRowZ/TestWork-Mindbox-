@@ -1,0 +1,16 @@
+Исходя из контекста задания предположим:
+1) Продукты это таблица Product 
+          (ProductID   INTEGER PRIMARY KEY AUTOINCREMENT,ProductName STRING)
+2) Категории это таблица Category 
+          (CategoryID   INTEGER PRIMARY KEY AUTOINCREMENT,CategoryName STRING)
+
+Следовательно должна быть еще смежная таблица которая хранит связку внешних ключей «ID продукта – ID категории»
+Предположим что это таблица: 
+ProductCategories (ProductID   REFERENCES Product (ProductID),CategoryID  REFERENCES Category (CategoryID))
+
+По условию задания необходимо написать SQL запрос для выбора всех пар «Имя продукта – Имя категории». 
+Если у продукта нет категорий, то его имя все равно должно выводиться.
+
+SELECT Product.ProductName AS Product, Category.CategoryName AS Category
+FROM Product 
+LEFT JOIN (Category INNER JOIN ProductCategories ON Category.CategoryID = ProductCategories.CategoryID) ON Product.ProductID = ProductCategories.ProductID;
