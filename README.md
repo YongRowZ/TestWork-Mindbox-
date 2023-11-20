@@ -1,5 +1,5 @@
 # TestWork-Mindbox-
-# .NET Framework 6.0
+# .NET 6.0
 Figures -> Родительский класс содержащий 
   Area (Площадь фигуры)
 
