@@ -3,6 +3,17 @@
     public class Figure 
     {
         public double Area { get; set; }
+
+        public double MatchArea(double radius) 
+        { 
+            return Math.PI * radius * radius; 
+        }
+
+        public double MatchArea(double a, double b, double c)
+        {
+            double p = (a + b + c) / 2;
+            return Math.Sqrt(p * (p - a) * (p - b) * (p - c));
+        }
     }
     public class Circle:Figure
     {

@@ -18,7 +18,7 @@ namespace TestLIB_Mindbox_.Tests
             double b = 13;
             double c = 17;
 
-            Triangle tr = new Triangle(a,b,c);
+            Triangle tr = new(a,b,c);
 
             Assert.AreEqual
                 (93, (int)tr.Area, "Значение не равно ожидаемому!");

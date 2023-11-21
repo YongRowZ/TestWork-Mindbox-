@@ -16,7 +16,7 @@ namespace TestLIB_Mindbox_.Tests
         {
             double r = 10;
 
-            Circle cir = new Circle(r);
+            Circle cir = new(r);
             
             Assert.AreEqual
                 (314, (int)cir.Area, "Значение не равно ожидаемому!");
