@@ -25,17 +25,15 @@ namespace TestLIB_Mindbox_.Tests
         [TestMethod()]
         public void MatchAreaTest_Circle_10_314returned()
         {
-            Figure circle = new();
             Assert.AreEqual
-                (314, (int)circle.MatchArea(10), "Значение не равно ожидаемому!");
+                (314, (int)Figure.MatchArea(10), "Значение не равно ожидаемому!");
         }
 
         [TestMethod()]
         public void MatchAreaTest_Triangle_15and13and17_93returned()
         {
-            Figure triangle = new();
             Assert.AreEqual
-                (93, (int)triangle.MatchArea(15,13,17), "Значение не равно ожидаемому!");
+                (93, (int)Figure.MatchArea(15,13,17), "Значение не равно ожидаемому!");
         }
     }
 }
