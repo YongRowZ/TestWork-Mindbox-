@@ -2,79 +2,104 @@
 {
     public class Figure 
     {
-        public double Area { get; set; }
+        public double Area { get; private set; }
 
         public static double MatchArea(double radius) 
-        { 
-            return Math.PI * radius * radius; 
+        {
+            if (radius <= 0) 
+                return default;
+
+            else
+                return Math.PI * radius * radius;
         }
 
         public static double MatchArea(double a, double b, double c)
         {
-            double p = (a + b + c) / 2;
-            return Math.Sqrt(p * (p - a) * (p - b) * (p - c));
+            if (a <= 0 || b <= 0 || c <= 0) 
+                return default;
+
+            else
+            {
+                double p = (a + b + c) / 2;
+                return Math.Sqrt(p * (p - a) * (p - b) * (p - c));
+            }
+        }
+
+        public void SetArea(double area) 
+        {
+            if (area > 0)
+                Area = area;
+
+            else
+                Area = default;
         }
     }
+
     public class Circle:Figure
     {
-        public double Radius { get; set; }
+        public double Radius { get; private set; }
 
         public Circle(double radius) 
         {
-            Radius = radius;
-            Area = Math.PI * Radius * Radius;
+            if (radius <= 0) 
+                Radius = default;
+
+            else 
+            {
+                Radius = radius;
+                SetArea(Math.PI * Radius * Radius);
+            }
         }
     }
+
     public class Triangle:Figure 
     {
-        public double A { get; set; } 
-        public double B { get; set; } 
-        public double C { get; set; }
-        public bool Rectangular { get; set; }
+        public double A { get; private set; } 
+        public double B { get; private set; } 
+        public double C { get; private set; }
+        public bool Rectangular { get; private set; }
 
         public Triangle(double a, double b, double c) 
         {
-            A = a;
-            B = b;
-            C = c;
+            if (a <= 0 || b <= 0 || c <= 0) 
+            {
+                A = B = C = default;
+                Rectangular = default;
+            }
 
-            AreaTriangle();
+            else 
+            {
+                (A, B, C) = (a, b, c);
 
-            IsRectangular();
+                AreaTriangle();
+                IsRectangular();
+            }
         }
 
         private void AreaTriangle() 
         {
             // Площадь треугольника по формуле Герона
             double p = (A + B + C) / 2;
-            Area = Math.Sqrt(p * (p - A) * (p - B) * (p - C));
+            SetArea(Math.Sqrt(p * (p - A) * (p - B) * (p - C)));
         }
 
         private void IsRectangular() 
         {
             // Определения прямоугольного треугольника
             double[] side = { A, B, C };
-            //double maxSide = side.Max();
             double ressultMinSide = 0;
 
-            //double[] newside = Array.Empty<double>();
             foreach (double i in side)
             {
                 if (i != side.Max())
-                {
                     ressultMinSide += i * i;
-                }
             }
 
             if (Math.Pow(side.Max(), 2) == ressultMinSide)
-            {
                 Rectangular = true;
-            }
+
             else
-            {
                 Rectangular = false;
-            }
         }
     }
-
 }

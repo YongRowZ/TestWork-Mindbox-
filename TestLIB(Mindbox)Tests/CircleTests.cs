@@ -14,13 +14,24 @@ namespace TestLIB_Mindbox_.Tests
         [TestMethod()]
         public void AreaCircleTest_10_314returned()
         {
-            double r = 10;
+            double radius = 10;
 
-            Circle cir = new(r);
+            Circle circle = new(radius);
             
             Assert.AreEqual
-                (314, (int)cir.Area, "Значение не равно ожидаемому!");
+                (314, (int)circle.Area, "Значение не равно ожидаемому!");
 
+        }
+
+        [TestMethod()]
+        public void AreaCircleTest_ExceptionValue_0returned() 
+        {
+            double radius = -10;
+
+            Circle circle = new(radius);
+
+            Assert.AreEqual
+                (0, circle.Area, "Значение не равно ожидаемому!");
         }
     }
 }

@@ -18,14 +18,30 @@ namespace TestLIB_Mindbox_.Tests
             double b = 13;
             double c = 17;
 
-            Triangle tr = new(a,b,c);
+            Triangle triangle = new(a,b,c);
 
             Assert.AreEqual
-                (93, (int)tr.Area, "Значение не равно ожидаемому!");
+                (93, (int)triangle.Area, "Значение не равно ожидаемому!");
 
             Assert.AreEqual
-                (false, tr.Rectangular, "Значение не равно ожидаемому!");
+                (false, triangle.Rectangular, "Значение не равно ожидаемому!");
 
+        }
+
+        [TestMethod()]
+        public void AreaTriangleTest_15andExceptionValueand17_0returned() 
+        {
+            double a = 15;
+            double b = -13;
+            double c = 17;
+
+            Triangle triangle = new(a, b, c);
+
+            Assert.AreEqual
+                (0, triangle.Area, "Значение не равно ожидаемому!");
+
+            Assert.AreEqual
+                (false, triangle.Rectangular, "Значение не равно ожидаемому!");
         }
     }
 }
