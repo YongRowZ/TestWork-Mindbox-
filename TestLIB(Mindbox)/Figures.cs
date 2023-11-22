@@ -21,11 +21,10 @@
 
         public Circle(double radius) 
         {
-            this.Radius = radius;
-            this.Area = Math.PI * Radius * Radius;
+            Radius = radius;
+            Area = Math.PI * Radius * Radius;
         }
     }
-
     public class Triangle:Figure 
     {
         public double A { get; set; } 
@@ -35,9 +34,9 @@
 
         public Triangle(double a, double b, double c) 
         {
-            this.A = a;
-            this.B = b;
-            this.C = c;
+            A = a;
+            B = b;
+            C = c;
 
             AreaTriangle();
 
@@ -48,7 +47,7 @@
         {
             // Площадь треугольника по формуле Герона
             double p = (A + B + C) / 2;
-            this.Area = Math.Sqrt(p * (p - A) * (p - B) * (p - C));
+            Area = Math.Sqrt(p * (p - A) * (p - B) * (p - C));
         }
 
         private void IsRectangular() 
@@ -69,11 +68,11 @@
 
             if (Math.Pow(side.Max(), 2) == ressultMinSide)
             {
-                this.Rectangular = true;
+                Rectangular = true;
             }
             else
             {
-                this.Rectangular = false;
+                Rectangular = false;
             }
         }
     }
