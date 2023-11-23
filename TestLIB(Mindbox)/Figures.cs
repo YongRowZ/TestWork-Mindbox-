@@ -1,9 +1,12 @@
-﻿namespace TestLIB_Mindbox_
+﻿using System.Runtime.InteropServices;
+
+namespace TestLIB_Mindbox_
 {
     public class Figure 
     {
         public double Area { get; private set; }
 
+        /// <param name="radius">Радиус круга</param>
         public static double MatchArea(double radius) 
         {
             if (radius <= 0) 
@@ -13,6 +16,9 @@
                 return Math.PI * radius * radius;
         }
 
+        /// <param name="a">Одна из сторон треугольника</param>
+        /// <param name="b">Одна из сторон треугольника</param>
+        /// <param name="c">Одна из сторон треугольника</param>
         public static double MatchArea(double a, double b, double c)
         {
             if (a <= 0 || b <= 0 || c <= 0) 
@@ -25,6 +31,7 @@
             }
         }
 
+        /// <param name="area">Площадь фигуры</param>
         public void SetArea(double area) 
         {
             if (area > 0)
@@ -39,16 +46,10 @@
     {
         public double Radius { get; private set; }
 
+        /// <param name="radius">Радиус круга</param>
         public Circle(double radius) 
         {
-            if (radius <= 0) 
-                Radius = default;
-
-            else 
-            {
-                Radius = radius;
-                SetArea(Math.PI * Radius * Radius);
-            }
+            SetArea(MatchArea(radius));
         }
     }
 
@@ -59,31 +60,26 @@
         public double C { get; private set; }
         public bool Rectangular { get; private set; }
 
+        /// <param name="a">Одна из сторон треугольника</param>
+        /// <param name="b">Одна из сторон треугольника</param>
+        /// <param name="c">Одна из сторон треугольника</param>
         public Triangle(double a, double b, double c) 
         {
-            if (a <= 0 || b <= 0 || c <= 0) 
+            SetArea(MatchArea(a,b,c));
+
+            if (Area == default) 
             {
                 A = B = C = default;
                 Rectangular = default;
             }
-
             else 
             {
                 (A, B, C) = (a, b, c);
-
-                AreaTriangle();
-                IsRectangular();
+                isRectangular();
             }
         }
 
-        private void AreaTriangle() 
-        {
-            // Площадь треугольника по формуле Герона
-            double p = (A + B + C) / 2;
-            SetArea(Math.Sqrt(p * (p - A) * (p - B) * (p - C)));
-        }
-
-        private void IsRectangular() 
+        private void isRectangular() 
         {
             // Определения прямоугольного треугольника
             double[] side = { A, B, C };
