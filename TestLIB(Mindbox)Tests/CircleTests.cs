@@ -16,7 +16,7 @@ namespace TestLIB_Mindbox_.Tests
         {
             double radius = 10;
 
-            Circle circle = new(radius);
+            Figures.Circle circle = new(radius);
             
             Assert.AreEqual
                 (314, (int)circle.Area, "Значение не равно ожидаемому!");
@@ -28,7 +28,7 @@ namespace TestLIB_Mindbox_.Tests
         {
             double radius = -10;
 
-            Circle circle = new(radius);
+            Figures.Circle circle = new(radius);
 
             Assert.AreEqual
                 (0, circle.Area, "Значение не равно ожидаемому!");
