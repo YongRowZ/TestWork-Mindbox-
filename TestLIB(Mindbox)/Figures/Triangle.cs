@@ -3,36 +3,55 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestLIB_Mindbox_.Interfaces;
 
 namespace TestLIB_Mindbox_.Figures
 {
-    public class Triangle : Figure
+    public class Triangle : IFigure<double>
     {
-        public double A { get; private set; }
-        public double B { get; private set; }
-        public double C { get; private set; }
-        public bool Rectangular { get; private set; }
+        public double SideA {  get; set; }
+        public double SideB { get; set; }
+        public double SideC { get; set; }
+        public double Area { get; set; }
+        public bool Rectangular { get; set; }
 
-        /// <param name="a">Одна из сторон треугольника</param>
-        /// <param name="b">Одна из сторон треугольника</param>
-        /// <param name="c">Одна из сторон треугольника</param>
-        public Triangle(double a, double b, double c)
+        public Triangle(double sideA, double sideB, double sideC) 
         {
-            SetArea(MatchArea(a, b, c));
+            (SideA, SideB, SideC) = (sideA, sideB, sideC);
 
-            if (Area != default)
+            if (IsValid()) 
             {
-                (A, B, C) = (a, b, c);
+                Area = MathArea();
                 Rectangular = isRectangular();
+            }
+
+            else 
+            {
+                SideA = SideB = SideC = default;
             }
         }
 
-        private bool isRectangular()
+        public bool IsValid()
         {
-            // Определения прямоугольного треугольника
-            return Math.Pow(A, 2) + Math.Pow(B, 2) == Math.Pow(C, 2) ||
-                   Math.Pow(A, 2) + Math.Pow(C, 2) == Math.Pow(B, 2) ||
-                   Math.Pow(B, 2) + Math.Pow(C, 2) == Math.Pow(A, 2);
+            return (SideA + SideB > SideC &&
+                    SideA + SideC > SideB &&
+                    SideB + SideC > SideA);
+        }
+
+        public double MathArea()
+        {
+            double area = default;
+            double p = ((SideA + SideB + SideC) / 2);
+
+            return SideA <= 0 || SideB <= 0 || SideC <= 0 ?
+                area : Math.Sqrt(p * (p - SideA) * (p - SideB) * (p - SideC));
+        }
+
+        public bool isRectangular() 
+        {
+            return Math.Pow(SideA, 2) + Math.Pow(SideB, 2) == Math.Pow(SideC, 2) ||
+                   Math.Pow(SideA, 2) + Math.Pow(SideC, 2) == Math.Pow(SideB, 2) ||
+                   Math.Pow(SideB, 2) + Math.Pow(SideC, 2) == Math.Pow(SideA, 2);
         }
     }
 }
